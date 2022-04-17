@@ -1,0 +1,4 @@
+Python
+django
+djangorestframework
+django-redis
