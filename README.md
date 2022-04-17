@@ -31,7 +31,7 @@ For the usage of this Api you have two submit the values mentioned above in the 
     http://127.0.0.1:8000/api/?i=0&n=3
     http://127.0.0.1:8000/api/?n=4&i=2
    
-Note that if any of the two arguments is missing its going to rise an error, same way for negative values or if any of the values exceeds the length avalible.
+Note that if any of the two arguments is missing its going to rise an error message, same way for negative values or if any of the values exceeds the length avalible.
 
 Also note that the memory cache will hold the information shown for the next **ten seconds**, after this you can do another search using the same syntax
 

@@ -7,6 +7,9 @@ from rest_framework.decorators import api_view
 import json
 
 def Stories(values):
+    """ Function that take two arguments pass it in list format [i, n]
+        return a list with n elements from the hacker-news list starting in the index i
+    """
     i= values[0]
     n= values[1]
 
@@ -23,6 +26,9 @@ def Stories(values):
     
 
 def wantedStories(resentStories):
+    """ Function that take the list returned from the Stories function as argument
+        return a list of dictionarys with the id and the title of every story in the list
+    """
     wantedStories = [json.loads(urlopen("https://hacker-news.firebaseio.com/v0/item/{}.json?print=pretty".format(item)).read()) for item in resentStories]
     detailedStories = [{k:detail[k] for k in ('id', 'title')} for detail in wantedStories]
     return detailedStories
@@ -30,6 +36,13 @@ def wantedStories(resentStories):
 
 @api_view(['GET'])
 def storiesResponse(request):
+    """ Function that take the request and validate in wich format its gonna be pass it
+        if the information is cached return the same information
+        if the information is pass in the url body assing a list with values finded
+        if the information is pass in json format assing a list with values finded
+        then set the cache information for the next queries
+        return a list of dictionarys with the id and the title of every story in the list
+    """
     if cache.get('stories') and cache.get('topStories'):
         return JsonResponse(cache.get('stories'), safe=False)
     else:
